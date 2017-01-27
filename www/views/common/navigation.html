@@ -1,0 +1,44 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="text-center dropdown profile-element" dropdown>
+          <img alt="image" class="img-circle" ng-src="{{currentUser.picture}}"/>
+          <a class="dropdown-toggle" dropdown-toggle href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">{{currentUser.displayName}}  <b class="caret"></b></strong>
+                             </span>
+                            </span>
+          </a>
+          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><a ui-sref="user.profile">Profile</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="logout()">Logout</a></li>
+          </ul>
+        </div>
+        <div class="logo-element">
+          <img class="logo-menu" src="images/logo-light.png">
+        </div>
+      </li>
+      <li ng-class="{active: $state.current.match('main')}">
+        <a ui-sref="user.main"><i class="fa fa-home"></i> <span class="nav-label"> {{ 'HOME' | translate }} </span></a>
+      </li>
+      <!--li ng-class="{active: $state.current.match('report')}">
+        <a ui-sref="user.main"><i class="fa fa-flag-checkered"></i> <span class="nav-label"> {{ 'REPORTS' | translate }} </span></a>
+      </li-->
+
+      <li ng-class="{active: $state.includes('settings')}">
+        <a href=""><i class="fa fa-cogs"></i> <span class="nav-label">{{ 'SETTINGS' | translate }}</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('settings')}">
+          <li ui-sref-active="active"><a ui-sref="user.connections">{{ 'CONNECTIONS' | translate }}</a></li>
+          <li ui-sref-active="active"><a ui-sref="user.rooms">{{ 'ROOMS' | translate }}</a></li>
+          <li ui-sref-active="active"><a ui-sref="user.device">{{ 'DEVICES' | translate }}</a></li>
+          <li ui-sref-active="active"><a ui-sref="user.categories">{{ 'CATEGORIES' | translate }}</a></li>
+          <li ui-sref-active="active"><a ui-sref="user.panel">{{ 'PANEL' | translate }}</a></li>
+          <li ui-sref-active="active"><a ui-sref="user.galleries">{{ 'IMAGE GALLERY' | translate }}</a></li>
+        </ul>
+      </li>
+      </ul>
+  </div>
+</nav>

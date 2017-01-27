@@ -1,0 +1,43 @@
+{
+  "name": "core",
+  "version": "0.0.1",
+  "description": "Mango Tools Core",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "HomFi"
+  ],
+  "author": "Jean-Baptiste Blanc",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.2",
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "connect-busboy": "0.0.2",
+    "cors": "^2.7.1",
+    "cryptiles": "^3.1.1",
+    "crypto-js": "^3.1.6",
+    "express": "^4.14.0",
+    "fs-extra": "^0.30.0",
+    "image-size": "^0.5.0",
+    "install": "^0.8.1",
+    "jsonfile": "^2.3.1",
+    "jsonwebtoken": "^7.1.6",
+    "lodash": "^4.14.0",
+    "multer": "^1.2.0",
+    "nedb": "^1.8.0",
+    "node-dir": "^0.1.15",
+    "node-ipc": "^7.0.0",
+    "node-ssdp": "^3.0.0-beta2",
+    "npm": "^3.10.5",
+    "password-generator": "^2.0.2",
+    "path": "^0.12.7",
+    "recursive-readdir": "^2.0.0",
+    "socket.io": "^1.4.8",
+    "util": "^0.10.3",
+    "uuid": "^3.0.1",
+    "winston": "^2.2.0"
+  }
+}

@@ -1,0 +1,27 @@
+<div backstretch backstretch-images="images" class="backstretch" backstretch-duration="5000" backstretch-fade="1">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+      <div class="content">
+        <div>
+            <img class="logo-login" src="images/logo.png">
+        </div>
+        <h3>Simply Control</h3>
+        <p> Please Login in.</p>
+        <form class="m-t" id="login-form" role="form" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+          <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine , 'has-success' : loginForm.email.$valid && !loginForm.email.$pristine}">
+            <input type="email"  name="email" class="form-control" ng-model="credentials.email" placeholder="Email" required>
+            <p ng-show="loginForm.email.$error.required && !loginForm.email.$pristine" class="help-block"><i class="fa fa-exclamation"></i> Email Required</p>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine , 'has-success' : loginForm.password.$valid && !loginForm.password.$pristine}">
+            <input type="password" name="password" class="form-control" placeholder="Password" ng-model="credentials.password" id="password" required>
+            <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block"><i class="fa fa-exclamation"></i> Password Required</p>
+          </div>
+          <button type="submit"   ng-disabled="loginForm.$invalid" class="btn btn-primary block full-width m-b">Login</button>
+
+          <a ui-sref="anon.forgotPassword"><small>Forgot password?</small></a>
+          <p class="text-muted text-center"><small>Do not have an account?</small></p>
+          <a ui-sref="anon.register" class="btn btn-sm btn-white btn-block">Create an account</a>
+        </form>
+        <p class="m-t"> <small>The Config. Tool Is A Mango Tools Ltd Product</small> </p>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div backstretch backstretch-images="images" class="backstretch" backstretch-duration="5000" backstretch-fade="1">
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="content">
+      <div>
+        <img class="logo-login" src="images/logo.png">
+      </div>
+      <h3>Simply Control</h3>
+      <p> Please Login in.</p>
+      <form class="m-t" id="login-form" role="form" ng-submit="register(registerForm.$valid)" name="registerForm" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine , 'has-success' : registerForm.firstName.$valid && !registerForm.firstName.$pristine}">
+          <input type="text"  name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
+          <p ng-show="registerForm.firstName.$invalid && !registerForm.firstName.$pristine" class="help-block"><i class="fa fa-exclamation"></i> First Name required</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.lastName.$invalid && !registerForm.lastName.$pristine , 'has-success' : registerForm.lastName.$valid && !registerForm.lastName.$pristine}">
+          <input type="text"  name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
+          <p ng-show="registerForm.lastName.$invalid && !registerForm.lastName.$pristine" class="help-block"><i class="fa fa-exclamation"></i> Last Name required</p>
+        </div>
+        <div class="form-group"ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine , 'has-success' : registerForm.email.$valid && !registerForm.email.$pristine}">
+          <input class="form-control" placeholder="Email Address" name="email" type="email"  ng-model="user.email"   ng-remote-validate="http://localhost:1410/api/user/unique" ng-remote-throttle="550" ng-remote-method="GET" required>
+          <p ng-show="registerForm.email.$error.required && !registerForm.email.$pristine" class="help-block"><i class="fa fa-exclamation"></i> Email required</p>
+          <p ng-show="registerForm.email.$error.email  && !registerForm.email.$pristine" class="help-block"><i class="fa fa-exclamation"></i> Invalid Email</p>
+        </div>
+        <div class="form-group"  ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine , 'has-success' : registerForm.password.$valid && !registerForm.password.$pristine}">
+          <input class="form-control" placeholder="password" type="password" name="password" ng-model="user.password" id="password" required  ng-minlength="6">
+          <p ng-show="registerForm.password.$invalid && !registerForm.password.$pristine" class="help-block"><i class="fa fa-exclamation"></i> password required</p>
+          <p ng-show="registerForm.password.$error.minlength && !registerForm.password.$pristine" class="help-block"><i class="fa fa-exclamation"></i> password too short</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.passwordConfirm.$error.pwmatch && !registerForm.passwordConfirm.$pristine , 'has-success' : registerForm.passwordConfirm.$valid && !registerForm.passwordConfirm.$pristine}">
+          <input class="form-control" placeholder="Confirm password" type="password" name="passwordConfirm" ng-model='user.password_verify' pw-check="password" required >
+          <p ng-show="registerForm.passwordConfirm.$invalid.required && !registerForm.passwordConfirm.$pristine" class="help-block"><i class="fa fa-exclamation"></i> password confirmation required</p>
+          <p ng-show="registerForm.passwordConfirm.$error.pwmatch && !registerForm.passwordConfirm.$pristine " class="help-block"><i class="fa fa-exclamation"></i> Passwords are not matching</p>
+        </div>
+        <button type="submit"  ng-disabled="registerForm.$invalid" class="btn btn-primary block full-width m-b">Register</button>
+        <p class="text-muted text-center"><small>Have an account?</small></p>
+        <a ui-sref="anon.login" class="btn btn-sm btn-white btn-block">Log in here.</a>
+      </form>
+      <p class="m-t"> <small>The Config. Tool Is A Mango Tools Ltd Product</small> </p>
+    </div>
+  </div>
+</div>

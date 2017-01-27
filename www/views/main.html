@@ -1,0 +1,37 @@
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-lg-12">
+        <h2 class="uppercase">{{ 'WELCOME' | translate }} {{currentUser.firstName}} </h2>
+            <ul class="list-group clear-list m-t">
+                <li class="list-group-item fist-item">
+                                <span class="pull-right">
+                                    {{switches.length}}
+                                </span>
+                    <span class="label label-success">1</span> Total number of connected panels
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    {{devices.length}}
+                                </span>
+                    <span class="label label-info">2</span> Total number of connected devices
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    {{category.length}}
+                                </span>
+                    <span class="label label-primary">3</span> Total number of connected categories
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    {{rooms.length}}
+                                </span>
+                    <span class="label label-default">4</span>Total number of rooms
+                </li>
+            </ul>
+            <p class="text-center">
+                Dear {{currentUser.firstName}}, please go to SETTINGS / CONNECTIONS to setup your Loxone &amp; Sonos system
+            </p>
+        <p class="text-center">
+            Then go to SETTINGS / PANEL to enter your Panel serial number
+        </p>
+    </div>
+</div>

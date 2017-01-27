@@ -1,0 +1,157 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row border-bottom">
+        <div class="col-lg-13">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Image Gallery</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a ui-sref="user.main">{{ 'Home' | translate }}</a>
+                        </li>
+                        <li>
+                            <a>Settings</a>
+                        </li>
+                        <li class="active">
+                            <strong>Image Gallery</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" nv-file-drop="" uploader="uploader">
+        <div class="col-lg-13">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5><b>Upload Background Image</b></h5>
+                        <div class="ibox-tools">
+                            <ibox>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            </ibox>
+                            <a title="Upload pictures & set your device background picture under the PANEL section"
+                               data-toggle="tooltip" data-placement="top" tooltip>
+                                <i class="fa fa-info"></i>
+                            </a>
+                        </div>
+                </div>
+                <div class="ibox-content product-box">
+
+                    <!-- ####################################################### -->
+                    <!-- #####################   Upload  #################### -->
+                    <!-- ####################################################### -->
+
+                    <div class="row wrapper">
+
+                        <div class="col-xs-6 col-md-4">
+
+                            <h3>Select files</h3>
+
+                            <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                                Base drop zone
+                            </div>
+
+                            <input class="btn btn-primary" type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-8">
+                            <h2>Upload images</h2>
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th width="30%">Name</th>
+                                    <th ng-show="uploader.isHTML5">Size</th>
+                                    <th ng-show="uploader.isHTML5">Progress</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in uploader.queue">
+                                    {{item}}
+                                    <td>
+                                        <strong>{{ item.file.name }}</strong>
+                                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    </td>
+                                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                    <td ng-show="uploader.isHTML5">
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div>
+                                Queue progress:
+                                <div class="progress" style="">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                                </button>
+                                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-13">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><b>Background gallery</b></h5>
+            </div>
+            <div class="ibox-content product-box">
+                <div class="row" ng-repeat="image in images">
+                    <div class="col-md-6 col-md-offset-3 text-center m-b-lg" >
+                        <div class="text-center">
+                            <h2>{{image.name}}</h2>
+                        </div>
+                        <div class="text-center">
+                            <img class="image-imitate img-responsive" ng-class="{'fa-rotate-0': image.rotation === 0, 'fa-rotate-90': image.rotation === 90,'fa-rotate-180': image.rotation === 180, 'fa-rotate-270': image.rotation ===270 }" ng-src="{{image.path}}">
+                        </div>
+                        <button class="btn btn-primary btn-lg" ng-click="rotatePicture(image,0)"
+                                ng-class="{'btn-danger': image.rotation === 0}"><i class="fa fa-picture-o" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-primary btn-lg"  ng-click="rotatePicture(image,90)"
+                                ng-class="{'btn-danger': image.rotation ===90}"><i class="fa fa-picture-o fa-rotate-90" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-primary btn-lg" ng-click="rotatePicture(image,180)"
+                                ng-class="{'btn-danger': image.rotation ===180}"><i class="fa fa-picture-o fa-rotate-180" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-primary btn-lg" ng-click="rotatePicture(image,270)"
+                                ng-class="{'btn-danger': image.rotation ===270}"><i class="fa fa-picture-o fa-rotate-270" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-primary btn-lg" ng-click="deleteImage(image)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

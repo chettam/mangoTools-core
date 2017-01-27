@@ -1,0 +1,478 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Panel</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a ui-sref="user.main">{{ 'Home' | translate }}</a>
+      </li>
+      <li>
+        <a>Settings</a>
+      </li>
+      <li class="active">
+        <strong>Panel</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+      <!--<div class="ibox float-e-margins">-->
+        <!--<div class="ibox-title">-->
+          <!--<h5>Serial Number</h5>-->
+          <!--<div class="ibox-tools">-->
+            <!--<ibox>-->
+            <!--<a class="collapse-link">-->
+              <!--<i class="fa fa-chevron-up"></i>-->
+            <!--</a>-->
+            <!--<a class="close-link">-->
+              <!--<i class="fa fa-times"></i>-->
+            <!--</a>-->
+              <!--</ibox>-->
+            <!--<a title="Enter the serial number of your panel"-->
+               <!--data-toggle="tooltip" data-placement="top" tooltip>-->
+              <!--<i class="fa fa-info"></i>-->
+            <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="ibox-content">-->
+          <!--<div class="text-center">-->
+            <!--<button type="submit" class="btn btn-block btn-primary"-->
+                    <!--ng-click="serialNumber()"> Click To Enter Device Serial Number <i class="fa fa-tablet" aria-hidden="true"></i>-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div  class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Switch </h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="List of your connected panels"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th class="text-navy ">Serial Number</th>
+              <th class="text-navy ">Default Room</th>
+              <th class="text-navy ">Connected</th>
+              <th class="text-navy ">Delete</th>
+            </tr>
+            </thead>
+            <tbody  ng-repeat="panel in switches">
+            <tr ng-class="{selected: panel._id === idSelectedSwitch}" ng-click="selectSwitch(panel)">
+              <td class="table-text">{{panel.serial}}</td>
+              <td class="table-text"> {{panel.room.name}}</td>
+              <td class="table-text">{{panel.connected}}</td>
+              <td class="table-text"><button class="btn btn-danger" ng-click="deleteSwitch(panel)" title="Delete"><span><i class="fa fa-trash-o" aria-hidden="true"></i></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!--div-- class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Tiles</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-striped">
+            <tr  class="onoffswitch">
+              <td>
+                <input bs-switch ng-model="colorType" switch-change="toggleColorType()" switch-on-color="primary" switch-off-color="success"
+                       type="checkbox" switch-size="medium" switch-on-text="Background <br /> Colour" switch-off-text="Border <br /> Colour"
+                       switch-animate="true" ng-false-value="'border'" ng-true-value="'background'">
+              </td>
+            </tr>
+            <tr>
+              <td class="col-lg-10" ng-style="{'background-color' : colorType ==='background' ? background : selectedSwitch.settings.hexagon.borderColor }">
+                <color-picker  borderColor="selectedSwitch.settings.hexagon.borderColor" color="selectedSwitch.settings.hexagon.color "></color-picker>
+              </td>
+            </tr>
+            <tr>
+
+              <td class="table-text col-lg-10">Border Thickness
+                <rzslider rz-slider-model="selectedSwitch.settings.hexagon.borderWidth" rz-slider-options="borderWidth.options">
+                </rzslider>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div-->
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Set Background Picture - <small>Change Your Background Picture</small></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="Click on serial number first, then choose a picture uploaded from your image gallery as your panel's background picture"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+            <div class="carousel slide" id="carousel2">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img alt="image" class="img-responsive" ng-src="{{backgroundImages[currentImage].path}}"/>
+                  <div class="carousel-caption">
+                    <p>{{backgroundImages[currentImage].name}}</p>
+                  </div>
+                  <a data-slide="prev" ng-click="prevButton()" class="left carousel-control">
+                    <span class="icon-prev"></span>
+                  </a>
+                  <a data-slide="next" ng-click="nextButton()" class="right carousel-control">
+                    <span class="icon-next"></span>
+                  </a>
+                </div>
+                <div class="padding">
+                  <button type="submit" class="btn btn-block btn-primary"
+                          ng-click="backgroundPic()" >Set as Background Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Set Background brightness</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="Click on a serial number first, then set your panel's background brightness"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <h4>Change brightness (%)</h4>
+          <rzslider rz-slider-model="selectedSwitch.settings.background.brightness" rz-slider-options="brightness.options"></rzslider>
+          <div> <br />
+            <span>Brightness is:</span>
+            <div class="stat-percent">{{selectedSwitch.settings.background.brightness}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--div-- class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Set Background Picture - <small>Change Your Background Picture</small></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <div class="col-md-offset-3 col-lg-6">
+            <div class="carousel slide" id="carousel2">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img alt="image" class="img-responsive" ng-src="{{'http://localhost' + backgroundImages[currentImage].path}}"/>
+                  <div class="carousel-caption">
+                    <p>{{backgroundImages[currentImage].name}}</p>
+                  </div>
+                  <a data-slide="prev" ng-click="prevButton()" class="left carousel-control">
+                    <span class="icon-prev"></span>
+                  </a>
+                  <a data-slide="next" ng-click="nextButton()" class="right carousel-control">
+                    <span class="icon-next"></span>
+                  </a>
+                </div>
+                <div class="padding">
+                  <button type="submit" class="btn btn-block btn-primary"
+                          ng-click="backgroundPic()" >Set as Background Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div-->
+  </div>
+
+  <div class="row">
+    <!--div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Font Size</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <h4>Change Fontsize </h4>
+          <rzslider rz-slider-model="selectedSwitch.settings.fonts.factor" rz-slider-options="fontSize.options"></rzslider>
+          <div> <br />
+            <span>Font Size is:</span>
+            <div class="stat-percent">{{selectedSwitch.settings.fonts.factor}}</div>
+          </div>
+        </div>
+      </div>
+    </div-->
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Change Default Room</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="Click on a serial number first, then choose the room your panel would be as your default room"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <h4>Set Default Room</h4>
+          <select class="form-control m-b" ng-model="selectedSwitch.room" ng-options="room.name for room in rooms" required>
+            <option value="">-- choose room --</option>
+          </select>
+          <div><br />
+            <span>Default Room is:</span>
+            <div class="stat-percent">{{selectedSwitch.room.name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>ScreenSaver Timeout</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="Click on a serial number first, then set your screensaver timeout"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <h4>Set ScreenSaver Timeout (s)</h4>
+          <rzslider rz-slider-model="selectedSwitch.settings.screenSaver.timeout" rz-slider-options="timeOut.options"></rzslider>
+          <div> <br />
+            <span>ScreenSaver Timeout is:</span>
+            <div class="stat-percent">{{selectedSwitch.settings.screenSaver.timeout}}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--div class="row">
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Change Default Room</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <h4>Set Default Room</h4>
+          <select class="form-control m-b" ng-model="selectedSwitch.room" ng-options="room.name for room in rooms" required>
+            <option value="">-- choose room --</option>
+          </select>
+          <div><br />
+            <span>Default Room is:</span>
+            <div class="stat-percent">{{selectedSwitch.room.name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><b>Text Color</b></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <h4>Change Text Color</h4>
+          <select class="form-control m-b" ng-model="selectedSwitch.settings.fonts.color" ng-options="color for color in colors" required>
+            <option value="">-- choose color --</option>
+          </select>
+          <div><br />
+            <span>Text Color is:</span>
+            <div class="stat-percent" ng-style="{'color': selectedSwitch.settings.fonts.color}"><p>{{selectedSwitch.settings.fonts.color}}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Set Panel Unlock Code <small class="m-l-sm"> Please choose 4 icons as your passcode</small></h5>
+            <div class="ibox-tools">
+              <ibox>
+              <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+          </ibox>
+
+              <a title="Click on a serial number first, then set your panel unlock passcode"
+                 data-toggle="tooltip" data-placement="top" tooltip>
+                <i class="fa fa-info"></i>
+              </a>
+            </div>
+        </div>
+        <div class="ibox-content icons-box">
+          <div class="list-group">
+            <div class="infont" ng-repeat="filter in iconMapping">
+              <div class="col-md-3 col-sm-4">
+                <a ng-click="setFilter($index)"><i class="icon {{filter.icon}}"></i> {{filter.name}} </a>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+        <div class="text-center"> Passcode Status :
+          <input bs-switch ng-model="selectedSwitch.settings.lock.enabled" ng-click="toggleUnlock()"
+              switch-change="toggleUnlock()" type="checkbox" switch-size="medium"
+              switch-animate="true">
+        </div>
+        <div class="ibox-title">
+          <h5>Your passcode <small ng-hide="selectedSwitch.settings.lock.selected.length == 4"> - {{iconsNeeded}} more icon needed </small></h5>
+            <div class="ibox-tools">
+              <ibox>
+              <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+          </ibox>
+
+              <a title="Choose between using a panel passcode to unlock your panel or not"
+                 data-toggle="tooltip" data-placement="top" tooltip>
+                <i class="fa fa-info"></i>
+              </a>
+            </div>
+        </div>
+        <div class="ibox-content icons-box">
+            <span >
+              <a><i class="icon {{ selectedSwitch.settings.lock.selected[0] }} ionicIcon"></i></a>
+              <a><i class="icon {{ selectedSwitch.settings.lock.selected[1] }} ionicIcon"></i></a>
+              <a><i class="icon {{ selectedSwitch.settings.lock.selected[2] }} ionicIcon"></i></a>
+              <a><i class="icon {{ selectedSwitch.settings.lock.selected[3] }} ionicIcon"></i></a>
+            </span>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <a ng-click="deleteIcon()" ng-show="selectedSwitch.settings.lock.selected.length >= 1" class="btn btn-danger"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Return To Factory Setting</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+            <a title="Return your device to factory settings. This would delete all your personal settings"
+               data-toggle="tooltip" data-placement="top" tooltip>
+              <i class="fa fa-info"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content profile-content">
+          <h4>Delete Account Settings</h4>
+          <a class="btn btn-block btn-danger" ng-click="deleteAccount()">Delete<i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
