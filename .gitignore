@@ -75,3 +75,6 @@ Temporary Items
 ## File-based project format:
 /db/*.db
 /services/*
+
+.DS_Store
+.idea/

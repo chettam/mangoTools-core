@@ -12,6 +12,10 @@ db.images       = new Datastore({ filename: __dirname +'/../db/images.db'      ,
 db.rooms        = new Datastore({ filename: __dirname +'/../db/rooms.db'       , autoload: true });
 db.users        = new Datastore({ filename: __dirname +'/../db/users.db'       , autoload: true });
 
+
+/**
+ *  define NEDB indexes for faster queries 
+ */
 db.users.ensureIndex({ fieldName: 'email', unique :true }, function (err) {});
 db.images.ensureIndex({ fieldName: 'name', unique :true }, function (err) {});
 db.rooms.ensureIndex({ fieldName: 'name', unique :true }, function (err) {});
@@ -21,4 +25,4 @@ db.clients.ensureIndex({ fieldName: 'serial', unique :true }, function (err) {})
 
 module.exports = {
     db : db
-}
+};

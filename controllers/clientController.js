@@ -69,19 +69,6 @@ module.exports = function(app){
         });
     });
 
-    //login
-    // app.post('/api/auth/client/peer',function(req,res){
-    //     var serial = req.body.serial;
-    //     var connected = req.body.connected;
-    //     db.clients.findOne({ serial : serial}).exec(function(err,client){
-    //         if(client){
-    //             client.comServer.connected = connected;
-    //             db.clients.update({_id : client._id},client,function(err,updated){
-    //                 return res.status(200);
-    //             })
-    //         }
-    //     })
-    // });
 
     /**
      * Update a client . Authentication required
@@ -111,7 +98,9 @@ module.exports = function(app){
 
     });
 
-    //find
+    /**
+     * Finds  client . Authentication required
+     */
     app.get('/api/auth/client',function(req,res){
         db.clients.find({}).exec(function(err,clients){
             if (err) {
@@ -119,9 +108,11 @@ module.exports = function(app){
             }
             if (clients) return res.status(200).json(clients);
         });
-    })
+    });
 
-
+    /**
+     *  Delete Client .Authentication required 
+     */
     app.delete('/api/auth/client/:id', function(req, res){
         delete req.body.token;
         if (!req.params['id']) {

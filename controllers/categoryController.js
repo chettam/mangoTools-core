@@ -10,7 +10,7 @@ module.exports = function(app){
   /**
    * return  a list of categories. Authentication required
    */
-    app.get('/api/auth/category', function(req, res){
+    app.get('/api/anon/category', function(req, res){
         db.categories.find({}, function (err, categories) {
             return res.status(200).json(categories);
         });

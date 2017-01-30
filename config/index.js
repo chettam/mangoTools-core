@@ -7,7 +7,7 @@ module.exports = {
     log  : process.env.NODE_ENV  === 'production' ? 'error' : 'silly',
     port : 1410,
     serialNumber : process.env.SERIALNUMBER || '2b359efb-3a98-4c52-9e45-05553df4d65b',
-    services : {},
+    services : [],
     states : {}
 
 };

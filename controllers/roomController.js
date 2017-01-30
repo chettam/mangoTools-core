@@ -9,18 +9,33 @@ const io = require('../helpers/io').io
 
 module.exports = function(app){
 
+    /**
+     * find all rooms. NO Authentication required
+     */
+    
+    
     app.get('/api/auth/room', function(req, res){
         db.rooms.find({}, function (err, rooms) {
             return res.status(200).json(rooms);
         });
     });
 
+    /**
+     *find all rooms .Authentication required
+     */
+    
+    
     app.get('/api/anon/room', function(req, res){
         db.rooms.find({}, function (err, rooms) {
             return res.status(200).json(rooms);
         });
     });
 
+
+    /**
+     * find a room .Authentication required
+     */
+    
     app.get('/api/auth/room/:id', function(req, res){
         db.rooms.findOne({_id :req.params.id}, function (err, room) {
             if (err) {
@@ -30,6 +45,12 @@ module.exports = function(app){
         });
     });
 
+
+    /**
+     * Delete room .Authentication required
+     */
+    
+    
     app.delete('/api/auth/room/:id', function(req, res){
         delete req.body.token;
         if (!req.params['id']) {
@@ -44,6 +65,12 @@ module.exports = function(app){
         });
     });
 
+
+    /**
+     * create  a new room from the config tool . Authentication required
+     */
+    
+    
     app.post('/api/auth/room', function(req, res){
         db.rooms.insert(req.body, function (err, room) {
             if (err) {
@@ -53,6 +80,12 @@ module.exports = function(app){
         });
     });
 
+
+    /**
+     * create or update room . Authentication required
+     */
+    
+    
     app.post('/api/auth/room/createUpdate', function(req, res){
         db.rooms.findOne({ _id : req.body._id},function(err,room){
             if (err) {
@@ -78,6 +111,10 @@ module.exports = function(app){
             }
         })
     });
+
+    /**
+     * create  or update room by name .  Authentication required
+     */
 
     app.post('/api/anon/room/createUpdateByName/:name', function(req, res){
         db.rooms.findOne({name : req.params.name},function(err,room){

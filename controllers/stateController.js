@@ -13,14 +13,3 @@ module.exports = function(app){
 
 };
 
-
-//execute : function(req,res){
-//    console.log(req.body)
-//    if(!req.isSocket) return res.badRequest('Websocket only');
-//    if(req.body.hasOwnProperty('state')){
-//        //Dispatcher.execute(req.body.state,req.body['value']);
-//        return res.ok();
-//    } else {
-//        return res.badRequest();
-//    }
-//}

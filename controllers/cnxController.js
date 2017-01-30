@@ -2,12 +2,17 @@
  * Created by jbblanc on 20/05/2016.
  */
 
-const uuid = require('uuid')
-const processManager = require('../helpers/processManager')
-const ipc = require('../helpers/ipc')
-const db = require('../config/db').db
+const uuid = require('uuid');
+const processManager = require('../helpers/processManager');
+const ipc = require('../helpers/ipc');
+const db = require('../config/db').db;
 
 module.exports = function(app){
+
+
+    /**
+     *   Create a service connection
+     */
 
     app.post('/api/auth/cnx', function(req, res){
         if (!req.body.name || !req.body.kind ) {
@@ -28,6 +33,9 @@ module.exports = function(app){
         });
     });
 
+    /**
+     *  reply to authentication request  and send authenticated connection to the IPC server for processing
+     */
     app.post('/api/auth/cnx/auth', function(req, res){
         delete req.body.token;
         ipc.auth(req.body);
@@ -36,7 +44,9 @@ module.exports = function(app){
 
 
 
-
+    /**
+     * update connection status. authentication required
+     */
     app.post('/api/auth/cnx/:id', function(req, res){
         delete req.body.token;
         if (!req.params['id']) {
@@ -50,6 +60,9 @@ module.exports = function(app){
         });
     });
 
+    /**
+     *  Delete connection. authentication required
+     */
     app.delete('/api/auth/cnx/:id', function(req, res){
         delete req.body.token;
         if (!req.params['id']) {
@@ -65,6 +78,9 @@ module.exports = function(app){
         });
     });
 
+    /**
+     *  List connection. authentication required
+     */
     app.get('/api/auth/cnx', function(req, res){
         db.connections.find({},function(err,connections){
             if (err) {
@@ -74,6 +90,10 @@ module.exports = function(app){
         });
     });
 
+
+    /**
+     *  List connection by kind. authentication required
+     */
     app.get('/api/auth/cnx/:kind', function(req, res){
         if (!req.params['kind']) {
             return res.json(401, {error: 'id not provided, What a shame!'});

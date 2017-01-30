@@ -22,9 +22,10 @@
 
 
 
-/*
+/**
 * Display  Splash Screen
 */
+
 function splashScreen (){
 log.info(' ');
 log.info('███╗   ███╗ █████╗ ███╗   ██╗ ██████╗  ██████╗     ████████╗ ██████╗  ██████╗ ██╗     ███████╗');
@@ -45,8 +46,8 @@ if(process.env.NODE_ENV === 'production' && config.serialNumber === '2b359efb-3a
 if(process.env.NODE_ENV === 'production' && config.apiKey === 'H7F2vPZnCFLECLZQKF4z7bnvJqhk2VnkXcF9' ) log.error('Do not used the  default apiKey in production!')
 }
 
-/*
-* Search for insalled usable services
+/**
+* Search for installed usable services
 */
 
 function availableServices(cb){
@@ -65,10 +66,10 @@ function availableServices(cb){
       function(files,callback){
           async.each(files, function(file, cb) {
               if(file.match(/config.js/)){
-                  jsonfile.readFile(file, function(err, config) {
-                      if(config){
-                          log.debug('New services found : '+ JSON.stringify(config));
-                          config.services.push(config);
+                  jsonfile.readFile(file, function(err, serviceDefinition) {
+                      if(serviceDefinition){
+                          log.debug('New services found : '+ JSON.stringify(serviceDefinition));
+                          config.services.push(serviceDefinition);
                       }
                       cb()
                   })
@@ -92,14 +93,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-/*
+/**
 * Enable API security:
 * Each /api/auth route requires a valid Web token to be access
 */
 app.use('/api/auth/*',requireToken);
 
 
-/*
+/**
 *  Load express routing
 */
 

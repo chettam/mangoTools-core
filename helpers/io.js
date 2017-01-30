@@ -1,6 +1,6 @@
-const log = require('../config/log').logger
-const requireSocket = require('../policies/requireSocket')
-const ipc = require('./ipc')
+const log = require('../config/log').logger;
+const requireSocket = require('../policies/requireSocket');
+const ipc = require('./ipc');
 var io = {};
 
 
@@ -17,13 +17,6 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-//
-// start : function() {
-//   log.debug('Starting Socket server');
-//
-// },
-// io:io
+};
+module.exports.io = io;
 
-}
-module.exports.io = io
-//module.exports.io = io;

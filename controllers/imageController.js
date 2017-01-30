@@ -11,6 +11,9 @@ const db = require('../config/db').db
 
 module.exports = function(app){
 
+    /**
+     * get images .  NO Authentication required
+     */
     app.get('/api/auth/image/',function(req,res){
         db.images.find({},function(err,images){
             if(err) return res.status(401).json({err: err});
@@ -20,6 +23,9 @@ module.exports = function(app){
         })
     });
 
+    /**
+     *get background image only. Authentication required
+     */
     app.get('/api/auth/image/background',function(req,res){
         db.images.find({usage:'background'},function(err,images){
             if(err) return res.status(401).json({err: err});
@@ -29,6 +35,9 @@ module.exports = function(app){
         })
     });
 
+    /**
+     * get icons only . Authentication required
+     */
     app.get('/api/auth/image/icons',function(req,res){
         db.images.find({usage:'icon'},function(err,images){
             if(err) return res.status(401).json({err: err});
@@ -38,6 +47,9 @@ module.exports = function(app){
         })
     });
 
+    /**
+     * update image parameters . Authentication required
+     */
     app.post('/api/auth/image/:id',function(req,res){
         db.images.update({ _id : req.params.id},req.body , function(err,updated){
             if(err) return res.status(401).json({err: err});
@@ -46,6 +58,9 @@ module.exports = function(app){
     });
 
 
+    /**
+     * Delete image  .Authentication required
+     */
     app.delete('/api/auth/image/:id', function(req, res){
         delete req.body.token;
         if (!req.params.id) {
@@ -66,6 +81,10 @@ module.exports = function(app){
      ============================================================ */
     app.use(busboy());
 
+
+    /**
+     *  Image uploader
+     */
     app.post('/api/auth/image', function (req, res, next) {
         var fieldParameter;
         var fstream;

@@ -11,7 +11,12 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config');
 
-// Generates a token from supplied payload
+
+/**
+ *  Generate token from supplied payload ( aka user)
+ * @param payload
+ * @returns {*}
+ */
 module.exports.issue = function(payload) {
   return jwt.sign(
     payload,
@@ -22,7 +27,13 @@ module.exports.issue = function(payload) {
   );
 };
 
-// Verifies token on a request
+
+/**
+ *   Verify the validity of the provided token 
+ * @param token
+ * @param callback
+ * @returns {*}
+ */
 module.exports.verify = function(token, callback) {
   return jwt.verify(
     token, // The token to be verified
