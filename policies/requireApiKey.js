@@ -1,4 +1,5 @@
 const cryptiles = require('cryptiles')
+const config = require('../config')
 
 /**
  * Created by jbblanc on 20/05/2016.

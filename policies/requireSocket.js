@@ -1,5 +1,6 @@
 const jwToken = require('../helpers/jwToken')
 const cryptiles = require('cryptiles')
+const config = require('../config')
 
 
 module.exports = function(socket, next) {

@@ -4,7 +4,6 @@
 const generatePassword = require('password-generator')
 const jwToken          = require('../helpers/jwToken')
 const db = require('../config/db').db
-const io = require('../helpers/io').io
 
 module.exports = function(app){
 
@@ -38,6 +37,7 @@ module.exports = function(app){
                 return res.status(401).json({err: err});
             }
             if(client){
+                console.log(io)
                 io.sockets.emit('client', { verb :'created', uid :client._id , data :client});
                 return res.status(200).json({client: client, token: jwToken.issue({id: client._id})});
             } else {

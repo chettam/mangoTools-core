@@ -5,7 +5,6 @@
 const uuid = require('uuid');
 const db = require('../config/db').db;
 const _ = require('lodash');
-const io = require('../helpers/io').io;
 
 module.exports = function(app){
 

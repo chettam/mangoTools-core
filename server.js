@@ -17,9 +17,7 @@
  const ipc = require('./helpers/ipc');
  const processManager = require('./helpers/processManager');
  const log = require('./config/log').logger;
- const io = require('./helpers/io')(http)
-
-
+ const io = require('socket.io')(http);
 
 
 /**
@@ -45,6 +43,21 @@ log.info('Environment   :   ' + process.env.NODE_ENV || 'development');
 if(process.env.NODE_ENV === 'production' && config.serialNumber === '2b359efb-3a98-4c52-9e45-05553df4d65b' ) log.error('Do not used the  default serial number in production!')
 if(process.env.NODE_ENV === 'production' && config.apiKey === 'H7F2vPZnCFLECLZQKF4z7bnvJqhk2VnkXcF9' ) log.error('Do not used the  default apiKey in production!')
 }
+
+
+/**
+ *  Make io globally available.
+ */
+if(!global.io) global.io = io;
+io.use(requireSocket);
+
+
+io.sockets.on('connection', function (socket) {
+    socket.on('/api/auth/state/execute',function(data){
+        ipc.send(data);
+    });
+});
+
 
 /**
 * Search for installed usable services

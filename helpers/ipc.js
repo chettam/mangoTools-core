@@ -5,7 +5,6 @@ const ipc = require('node-ipc')
 const db = require('../config/db').db
 const log = require('../config/log').logger
 const states = require('../config').states
-const io = require('./io').io
 var clients = {};
 
 ipc.config.id   = 'homfi';
